@@ -3,6 +3,7 @@ package fr.Axxonte.RubyBot;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import fr.Axxonte.RubyBot.command.commands.HelpCommand;
+import fr.Axxonte.RubyBot.command.commands.Music.*;
 import fr.Axxonte.RubyBot.command.commands.PasteCommand;
 import fr.Axxonte.RubyBot.command.commands.PingCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -20,6 +21,13 @@ public class CommandManager {
         addCommand(new PingCommand());
         addCommand(new HelpCommand(this));
         addCommand(new PasteCommand());
+
+        addCommand(new JoinCommand());
+        addCommand(new PlayCommand());
+        addCommand(new LeaveCommand());
+        addCommand(new SkipCommand());
+        addCommand(new QueueCommand());
+        addCommand(new NowPlayingCommand());
     }
 
     private void addCommand(ICommand cmd) {
