@@ -14,19 +14,10 @@ public class UpdateCommand implements ICommand {
         if (!ctx.getAuthor().getId().equals(Config.get("Owner_id")))
             return;
 
-        Process process = Runtime.getRuntime().exec("../updateScript.sh");
-        printResults(process);
-        ctx.getChannel().sendMessage("Now Updating from the GitHub :heart:").queue();
+        Runtime.getRuntime().exec("../updateScript.sh");
+        ctx.getChannel().sendMessage("Updated :heart:").queue();
         System.exit(0);
 
-    }
-
-    public static void printResults(Process process) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
     }
 
     @Override
