@@ -12,7 +12,7 @@ public class Bot {
         new JDABuilder()
                 .setToken(Config.get("token"))
                 .addEventListeners(new Listener())
-                .setActivity(Activity.watching("<help "))
+                .setActivity(Activity.watching("<help  ||  by Axxonte"))
                 .build();
 
     }
