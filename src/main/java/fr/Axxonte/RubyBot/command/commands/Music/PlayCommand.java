@@ -8,6 +8,8 @@ import fr.Axxonte.RubyBot.Config;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 import javax.annotation.Nullable;
 import java.net.MalformedURLException;
@@ -40,6 +42,12 @@ public class PlayCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) {
         TextChannel channel = ctx.getChannel();
+        VoiceChannel vc = ctx.getMember().getVoiceState().getChannel();
+        AudioManager audioManager = ctx.getGuild().getAudioManager();
+
+        if(!ctx.getSelfMember().getVoiceState().inVoiceChannel()){
+            audioManager.openAudioConnection(vc);
+        }
 
         if (ctx.getArgs().isEmpty()) {
             channel.sendMessage("Please provide some arguments").queue();
