@@ -1,9 +1,10 @@
 package fr.Axxonte.RubyBot.command;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ICommand {
-    void handle(CommandContext ctx);
+    void handle(CommandContext ctx) throws IOException;
 
     String getName();
 

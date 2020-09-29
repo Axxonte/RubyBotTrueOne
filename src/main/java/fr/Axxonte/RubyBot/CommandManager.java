@@ -4,11 +4,13 @@ import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import fr.Axxonte.RubyBot.command.commands.HelpCommand;
 import fr.Axxonte.RubyBot.command.commands.Music.*;
+import fr.Axxonte.RubyBot.command.commands.Owner.UpdateCommand;
 import fr.Axxonte.RubyBot.command.commands.PasteCommand;
 import fr.Axxonte.RubyBot.command.commands.PingCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,7 @@ public class CommandManager {
         addCommand(new PingCommand());
         addCommand(new HelpCommand(this));
         addCommand(new PasteCommand());
+        addCommand(new UpdateCommand());
 
         addCommand(new JoinCommand());
         addCommand(new PlayCommand());
@@ -57,7 +60,7 @@ public class CommandManager {
         return null;
     }
 
-    void handle(GuildMessageReceivedEvent event) {
+    void handle(GuildMessageReceivedEvent event) throws IOException {
         String[] split = event.getMessage().getContentRaw()
                 .replaceFirst("(?i)" + Pattern.quote(Config.get("prefix")), "")
                 .split("\\s+");

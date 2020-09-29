@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 
 public class Listener extends ListenerAdapter {
 
@@ -41,7 +42,11 @@ public class Listener extends ListenerAdapter {
         }
 
         if (raw.startsWith(prefix)) {
-            manager.handle(event);
+            try {
+                manager.handle(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
