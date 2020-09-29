@@ -12,9 +12,9 @@ public class UpdateCommand implements ICommand {
         if (!ctx.getAuthor().getId().equals(Config.get("Owner_id")))
             return;
 
-        ctx.getChannel().sendMessage(Runtime.getRuntime().exec("pwd").getOutputStream().toString());
+        ctx.getChannel().sendMessage(Runtime.getRuntime().exec("pwd").getOutputStream().toString()).queue();
         ctx.getChannel().sendMessage("Now Updating from the GitHub :heart:").queue();
-        System.exit(0);
+        //System.exit(0);
 
     }
 
