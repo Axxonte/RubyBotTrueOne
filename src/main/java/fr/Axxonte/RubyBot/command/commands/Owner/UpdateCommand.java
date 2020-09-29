@@ -14,7 +14,7 @@ public class UpdateCommand implements ICommand {
         if (!ctx.getAuthor().getId().equals(Config.get("Owner_id")))
             return;
 
-        Process process = Runtime.getRuntime().exec("pwd");
+        Process process = Runtime.getRuntime().exec("../updateScript.sh");
         printResults(process);
         ctx.getChannel().sendMessage("Now Updating from the GitHub :heart:").queue();
         //System.exit(0);
