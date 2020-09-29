@@ -11,13 +11,11 @@ public class UpdateCommand implements ICommand {
     public void handle(CommandContext ctx) throws IOException {
         if (!ctx.getAuthor().getId().equals(Config.get("Owner_id")))
             return;
-        try {
-            Runtime.getRuntime().exec("../../updateScript.sh");
-            ctx.getChannel().sendMessage("Now Updating from the GitHub :heart:").queue();
-            System.exit(0);
-        }catch (IOException e){
-            ctx.getChannel().sendMessage("Update script not found \uD83E\uDD28 ...").queue();
-        }
+
+        Runtime.getRuntime().exec("../../updateScript.sh");
+        ctx.getChannel().sendMessage("Now Updating from the GitHub :heart:").queue();
+        System.exit(0);
+
     }
 
     @Override
