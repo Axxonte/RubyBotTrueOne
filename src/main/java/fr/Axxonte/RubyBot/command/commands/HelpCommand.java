@@ -58,6 +58,6 @@ public class HelpCommand implements ICommand {
 
     @Override
     public List<String> getAliases() {
-        return List.of("commands", "cmds", "commandlist");
+        return List.of("commands", "cmds", "commandlist", "aled");
     }
 }
