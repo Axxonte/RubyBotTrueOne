@@ -1,9 +1,12 @@
 package fr.Axxonte.RubyBot.command.commands.Music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
+
+import java.util.concurrent.BlockingQueue;
 
 public class SkipCommand implements ICommand {
     @Override
@@ -13,9 +16,10 @@ public class SkipCommand implements ICommand {
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild());
         TrackScheduler scheduler = musicManager.scheduler;
         AudioPlayer player = musicManager.player;
+        BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 
-        if (player.getPlayingTrack() == null) {
-            channel.sendMessage("The player isn't playing aything").queue();
+        if (queue.size() == 0) {
+            channel.sendMessage("There is nothing to play after.").queue();
 
             return;
         }
