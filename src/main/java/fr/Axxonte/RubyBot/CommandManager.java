@@ -2,11 +2,9 @@ package fr.Axxonte.RubyBot;
 
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
-import fr.Axxonte.RubyBot.command.commands.HelpCommand;
+import fr.Axxonte.RubyBot.command.commands.*;
 import fr.Axxonte.RubyBot.command.commands.Music.*;
 import fr.Axxonte.RubyBot.command.commands.Owner.UpdateCommand;
-import fr.Axxonte.RubyBot.command.commands.PasteCommand;
-import fr.Axxonte.RubyBot.command.commands.PingCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nullable;
@@ -24,6 +22,8 @@ public class CommandManager {
         addCommand(new HelpCommand(this));
         addCommand(new PasteCommand());
         addCommand(new UpdateCommand());
+        addCommand(new EdtCommand());
+        addCommand(new MemeCommand());
 
         addCommand(new JoinCommand());
         addCommand(new PlayCommand());
@@ -75,7 +75,11 @@ public class CommandManager {
 
             CommandContext ctx = new CommandContext(event, args);
 
-            cmd.handle(ctx);
+            try {
+                cmd.handle(ctx);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
