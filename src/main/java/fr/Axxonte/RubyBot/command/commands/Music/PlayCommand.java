@@ -5,11 +5,15 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchResult;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import fr.Axxonte.RubyBot.Config;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import javax.annotation.Nullable;
@@ -31,7 +35,7 @@ public class PlayCommand implements ICommand {
                     JacksonFactory.getDefaultInstance(),
                     null
             )
-                    .setApplicationName("Menudocs JDA tutorial bot")
+                    .setApplicationName("RubyBot")
                     .build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,10 +45,15 @@ public class PlayCommand implements ICommand {
     }
 
     @Override
-    public void handle(CommandContext ctx) {
+    public void handle(CommandContext ctx) throws InterruptedException {
         TextChannel channel = ctx.getChannel();
         VoiceChannel vc = ctx.getMember().getVoiceState().getChannel();
         AudioManager audioManager = ctx.getGuild().getAudioManager();
+
+        GuildMessageReceivedEvent event = ctx.getEvent();
+        PlayerManager playerManager = PlayerManager.getInstance();
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
+        AudioPlayer player = musicManager.player;
 
         if(!ctx.getSelfMember().getVoiceState().inVoiceChannel()){
             audioManager.openAudioConnection(vc);
@@ -73,6 +82,17 @@ public class PlayCommand implements ICommand {
         PlayerManager manager = PlayerManager.getInstance();
 
         manager.loadAndPlay(ctx.getChannel(), input);
+
+        /*try{
+            wait(10000L);
+        }catch (Exception e)
+        {
+            //Nickname modifier
+            AudioTrackInfo info = player.getPlayingTrack().getInfo();
+            ctx.getSelfMember().modifyNickname(info.title).queue();
+        }*/
+
+
     }
 
     private boolean isUrl(String input) {

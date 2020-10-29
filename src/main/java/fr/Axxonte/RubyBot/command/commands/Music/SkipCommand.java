@@ -2,6 +2,7 @@ package fr.Axxonte.RubyBot.command.commands.Music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -27,6 +28,16 @@ public class SkipCommand implements ICommand {
         scheduler.nextTrack();
 
         channel.sendMessage("Skipping the current track").queue();
+
+        //Nickname modifier
+
+        try{
+            wait(5000L);
+        }catch (Exception e)
+        {
+            AudioTrackInfo info = player.getPlayingTrack().getInfo();
+            ctx.getSelfMember().modifyNickname(info.title).queue();
+        }
     }
 
     @Override
