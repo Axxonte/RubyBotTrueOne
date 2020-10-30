@@ -19,6 +19,7 @@ public class PlayerManager {
     private static PlayerManager INSTANCE;
     private final AudioPlayerManager playerManager;
     private final Map<Long, GuildMusicManager> musicManagers;
+    private CommandContext ctx;
 
     private PlayerManager() {
         this.musicManagers = new HashMap<>();
@@ -31,6 +32,7 @@ public class PlayerManager {
     public synchronized GuildMusicManager getGuildMusicManager(Guild guild, CommandContext ctx) {
         long guildId = guild.getIdLong();
         GuildMusicManager musicManager = musicManagers.get(guildId);
+        this.ctx = ctx;
 
         if (musicManager == null) {
             musicManager = new GuildMusicManager(playerManager, ctx);
@@ -50,11 +52,16 @@ public class PlayerManager {
             public void trackLoaded(AudioTrack track) {
                 boolean isFirst = false;
 
-                if ()
+                if (musicManager.scheduler.getQueue().size() == 0){
+                    isFirst = true;
+                }
 
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
 
                 play(musicManager, track);
+                if (isFirst){
+                    ctx.getSelfMember().modifyNickname("▶ " + track.getInfo().title).queue();
+                }
             }
 
             @Override
