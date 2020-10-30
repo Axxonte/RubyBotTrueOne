@@ -14,7 +14,7 @@ public class SkipCommand implements ICommand {
     public void handle(CommandContext ctx) {
         TextChannel channel = ctx.getChannel();
         PlayerManager playerManager = PlayerManager.getInstance();
-        GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild());
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild(), ctx);
         TrackScheduler scheduler = musicManager.scheduler;
         AudioPlayer player = musicManager.player;
         BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
@@ -33,25 +33,7 @@ public class SkipCommand implements ICommand {
 
         channel.sendMessage("Skipping the current track").queue();
 
-        //Nickname modifier
 
-        AudioTrackInfo info = player.getPlayingTrack().getInfo();
-        String newNick = "";
-
-        if (info.title.length() > 32){
-            newNick = info.title.substring(0, 30);
-        }
-        else
-        {
-            newNick = info.title;
-        }
-
-        try{
-            wait(10000L);
-        }catch (Exception e)
-        {
-            ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-        }
     }
 
     @Override

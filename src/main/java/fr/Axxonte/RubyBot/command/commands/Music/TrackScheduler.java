@@ -1,9 +1,12 @@
 package fr.Axxonte.RubyBot.command.commands.Music;
 
+import com.jagrosh.jdautilities.command.Command;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import fr.Axxonte.RubyBot.command.CommandContext;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -14,13 +17,16 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     private static AudioPlayer player = null;
     private final BlockingQueue<AudioTrack> queue;
+    private CommandContext ctx;
 
     /**
      * @param player The audio player this scheduler uses
+     * @param ctx
      */
-    public TrackScheduler(AudioPlayer player) {
+    public TrackScheduler(AudioPlayer player, CommandContext ctx) {
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
+        this.ctx = ctx;
     }
 
     /**
@@ -48,6 +54,26 @@ public class TrackScheduler extends AudioEventAdapter {
         // Start the next track, regardless of if something is already playing or not. In case queue was empty, we are
         // giving null to startTrack, which is a valid argument and will simply stop the player.
         player.startTrack(queue.poll(), false);
+
+        //Nickname modifier
+
+        AudioTrackInfo info = player.getPlayingTrack().getInfo();
+        String newNick = "";
+
+        if (info.title.length() > 32){
+            newNick = info.title.substring(0, 30);
+        }
+        else
+        {
+            newNick = info.title;
+        }
+
+        try{
+            wait(10000L);
+        }catch (Exception e)
+        {
+            ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
+        }
     }
 
     @Override
@@ -55,6 +81,26 @@ public class TrackScheduler extends AudioEventAdapter {
         // Only start the next track if the end reason is suitable for it (FINISHED or LOAD_FAILED)
         if (endReason.mayStartNext) {
             nextTrack();
+
+            //Nickname modifier
+
+            AudioTrackInfo info = player.getPlayingTrack().getInfo();
+            String newNick = "";
+
+            if (info.title.length() > 32){
+                newNick = info.title.substring(0, 30);
+            }
+            else
+            {
+                newNick = info.title;
+            }
+
+            try{
+                wait(10000L);
+            }catch (Exception e)
+            {
+                ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
+            }
         }
     }
 

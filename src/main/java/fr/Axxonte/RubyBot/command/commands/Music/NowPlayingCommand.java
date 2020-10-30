@@ -16,7 +16,7 @@ public class NowPlayingCommand implements ICommand {
         GuildMessageReceivedEvent event = ctx.getEvent();
         TextChannel channel = event.getChannel();
         PlayerManager playerManager = PlayerManager.getInstance();
-        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild(), ctx);
         AudioPlayer player = musicManager.player;
 
         if (player.getPlayingTrack() == null) {

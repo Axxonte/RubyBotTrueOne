@@ -1,5 +1,6 @@
 package fr.Axxonte.RubyBot.command.commands.Music;
 
+import com.jagrosh.jdautilities.command.Command;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
@@ -7,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import fr.Axxonte.RubyBot.command.CommandContext;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
@@ -26,12 +28,12 @@ public class PlayerManager {
         AudioSourceManagers.registerLocalSource(playerManager);
     }
 
-    public synchronized GuildMusicManager getGuildMusicManager(Guild guild) {
+    public synchronized GuildMusicManager getGuildMusicManager(Guild guild, CommandContext ctx) {
         long guildId = guild.getIdLong();
         GuildMusicManager musicManager = musicManagers.get(guildId);
 
         if (musicManager == null) {
-            musicManager = new GuildMusicManager(playerManager);
+            musicManager = new GuildMusicManager(playerManager, ctx);
             musicManagers.put(guildId, musicManager);
         }
 
@@ -41,11 +43,15 @@ public class PlayerManager {
     }
 
     public void loadAndPlay(TextChannel channel, String trackUrl) {
-        GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
+        GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild(), new CommandContext(null , null));
 
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
+                boolean isFirst = false;
+
+                if ()
+
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
 
                 play(musicManager, track);
@@ -57,6 +63,8 @@ public class PlayerManager {
 
                 if (firstTrack == null) {
                     firstTrack = playlist.getTracks().get(0);
+
+
                 }
 
                 channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();

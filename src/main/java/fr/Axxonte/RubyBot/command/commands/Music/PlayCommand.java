@@ -52,7 +52,7 @@ public class PlayCommand implements ICommand {
 
         GuildMessageReceivedEvent event = ctx.getEvent();
         PlayerManager playerManager = PlayerManager.getInstance();
-        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild(), ctx);
         AudioPlayer player = musicManager.player;
 
         if(!ctx.getSelfMember().getVoiceState().inVoiceChannel()){

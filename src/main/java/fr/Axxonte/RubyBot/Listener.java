@@ -33,6 +33,7 @@ public class Listener extends ListenerAdapter {
             event.getChannel().sendMessage("Casses toi " + user.getName() + ". T'es black-listed sous-merde.").queue();
             return;
         }
+        
         String prefix = Config.get("prefix");
         String raw = event.getMessage().getContentRaw();
 
