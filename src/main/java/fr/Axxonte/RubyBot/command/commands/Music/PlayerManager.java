@@ -62,6 +62,10 @@ public class PlayerManager {
 
                 String newNick;
 
+                try{
+                    wait(10000L);
+                }catch (Exception e)
+                {
                 if (track.getInfo().title.length() > 32){
                     newNick = track.getInfo().title.substring(0, 30);
                 }
@@ -70,10 +74,7 @@ public class PlayerManager {
                     newNick = track.getInfo().title;
                 }
 
-                try{
-                    wait(10000L);
-                }catch (Exception e)
-                {
+
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
                 }
             }
