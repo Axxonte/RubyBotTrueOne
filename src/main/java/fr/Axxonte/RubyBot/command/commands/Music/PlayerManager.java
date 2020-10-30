@@ -62,16 +62,18 @@ public class PlayerManager {
 
                 play(musicManager, track);
 
-                try{
-                    wait(500000L);
-                }catch (Exception e)
-                {
+                try {
+                    Thread.sleep(5000L);
+                } catch (InterruptedException e) {
+                    ctx.getChannel().sendMessage("ERROR while Renaming").queue();
+                }
+
                 if (newNick.length() > 32){
                     newNick = newNick.substring(0, 30);
                 }
 
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-                }
+
             }
 
             @Override
