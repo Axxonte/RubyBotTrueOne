@@ -71,7 +71,7 @@ public class PlayerManager {
                         ctx.getChannel().sendMessage("ERROR while Renaming").queue();
                     }
 
-                    if (newNick.length() > 32) {
+                    if (newNick.length() > 30) {
                         newNick = newNick.substring(0, 30);
                     }
 
