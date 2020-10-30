@@ -23,7 +23,7 @@ public class LyricsCommand implements ICommand {
         GuildMessageReceivedEvent event = ctx.getEvent();
         TextChannel channel = event.getChannel();
         PlayerManager playerManager = PlayerManager.getInstance();
-        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild(), ctx);
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
         AudioPlayer player = musicManager.player;
 
         for (String s : ctx.getArgs()) {

@@ -14,7 +14,7 @@ public class SkipCommand implements ICommand {
     public void handle(CommandContext ctx) {
         TextChannel channel = ctx.getChannel();
         PlayerManager playerManager = PlayerManager.getInstance();
-        GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild(), ctx);
+        GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild());
         TrackScheduler scheduler = musicManager.scheduler;
         AudioPlayer player = musicManager.player;
         BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();

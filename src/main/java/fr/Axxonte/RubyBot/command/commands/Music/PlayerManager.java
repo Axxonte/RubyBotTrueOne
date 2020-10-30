@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import fr.Axxonte.RubyBot.CommandManager;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -29,10 +30,9 @@ public class PlayerManager {
         AudioSourceManagers.registerLocalSource(playerManager);
     }
 
-    public synchronized GuildMusicManager getGuildMusicManager(Guild guild, CommandContext ctx) {
+    public synchronized GuildMusicManager getGuildMusicManager(Guild guild) {
         long guildId = guild.getIdLong();
         GuildMusicManager musicManager = musicManagers.get(guildId);
-        this.ctx = ctx;
 
         if (musicManager == null) {
             musicManager = new GuildMusicManager(playerManager, ctx.getSelfMember());
@@ -45,7 +45,7 @@ public class PlayerManager {
     }
 
     public void loadAndPlay(TextChannel channel, String trackUrl) {
-        GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild(), new CommandContext(null , null));
+        GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
 
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
@@ -62,18 +62,21 @@ public class PlayerManager {
 
                 play(musicManager, track);
 
-                try {
-                    Thread.sleep(5000L);
-                } catch (InterruptedException e) {
-                    ctx.getChannel().sendMessage("ERROR while Renaming").queue();
-                }
+                ctx = CommandManager.ctx;
 
-                if (newNick.length() > 32){
-                    newNick = newNick.substring(0, 30);
-                }
+                if(isFirst) {
+                    try {
+                        Thread.sleep(5000L);
+                    } catch (InterruptedException e) {
+                        ctx.getChannel().sendMessage("ERROR while Renaming").queue();
+                    }
+
+                    if (newNick.length() > 32) {
+                        newNick = newNick.substring(0, 30);
+                    }
 
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-
+                }
             }
 
             @Override
