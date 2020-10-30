@@ -59,8 +59,22 @@ public class PlayerManager {
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
 
                 play(musicManager, track);
-                if (isFirst){
-                    ctx.getSelfMember().modifyNickname("▶ " + track.getInfo().title).queue();
+
+                String newNick;
+
+                if (track.getInfo().title.length() > 32){
+                    newNick = track.getInfo().title.substring(0, 30);
+                }
+                else
+                {
+                    newNick = track.getInfo().title;
+                }
+
+                try{
+                    wait(10000L);
+                }catch (Exception e)
+                {
+                    ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
                 }
             }
 

@@ -25,17 +25,17 @@ public class Listener extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         User user = event.getAuthor();
 
+        String prefix = Config.get("prefix");
+        String raw = event.getMessage().getContentRaw();
+
         if (user.isBot() || event.isWebhookMessage()) {
             return;
         }
 
-        if ( event.getAuthor().getIdLong() == 327690719085068289L) {
+        if ( raw.startsWith(prefix) && event.getAuthor().getIdLong() == 327690719085068289L) {
             event.getChannel().sendMessage("Casses toi " + user.getName() + ". T'es black-listed sous-merde.").queue();
             return;
         }
-        
-        String prefix = Config.get("prefix");
-        String raw = event.getMessage().getContentRaw();
 
         if (raw.equalsIgnoreCase(prefix + "shutdown")
                 && user.getId().equals(Config.get("owner_id"))) {
