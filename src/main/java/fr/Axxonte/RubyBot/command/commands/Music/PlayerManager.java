@@ -58,10 +58,10 @@ public class PlayerManager {
 
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
 
-                play(musicManager, track);
-
                 String newNick;
 
+                play(musicManager, track);
+                
                 try{
                     wait(30000L);
                 }catch (Exception e)
@@ -73,8 +73,6 @@ public class PlayerManager {
                 {
                     newNick = track.getInfo().title;
                 }
-
-
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
                 }
             }
