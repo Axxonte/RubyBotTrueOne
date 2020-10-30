@@ -63,7 +63,7 @@ public class PlayerManager {
                 play(musicManager, track);
 
                 try{
-                    wait(30000L);
+                    wait(500000L);
                 }catch (Exception e)
                 {
                 if (newNick.length() > 32){
