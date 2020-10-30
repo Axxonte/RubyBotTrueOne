@@ -19,9 +19,13 @@ public class SkipCommand implements ICommand {
         AudioPlayer player = musicManager.player;
         BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 
+        if (!ctx.getSelfMember().getVoiceState().getChannel().getMembers().contains(ctx.getMember())){
+            ctx.getChannel().sendMessage("You nee to be with me in a voice channel to change volume.").queue();
+            return;
+        }
+
         if (queue.size() == 0) {
             channel.sendMessage("There is nothing to play after.").queue();
-
             return;
         }
 
@@ -31,12 +35,22 @@ public class SkipCommand implements ICommand {
 
         //Nickname modifier
 
+        AudioTrackInfo info = player.getPlayingTrack().getInfo();
+        String newNick = "";
+
+        if (info.title.length() > 32){
+            newNick = info.title.substring(0, 31);
+        }
+        else
+        {
+            newNick = info.title;
+        }
+
         try{
-            wait(5000L);
+            wait(10000L);
         }catch (Exception e)
         {
-            AudioTrackInfo info = player.getPlayingTrack().getInfo();
-            ctx.getSelfMember().modifyNickname(info.title).queue();
+            ctx.getSelfMember().modifyNickname("▶" + newNick).queue();
         }
     }
 

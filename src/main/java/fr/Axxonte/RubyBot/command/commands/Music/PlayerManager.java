@@ -78,7 +78,9 @@ public class PlayerManager {
     }
 
     private void play(GuildMusicManager musicManager, AudioTrack track) {
+
         musicManager.scheduler.queue(track);
+
     }
 
     public static synchronized PlayerManager getInstance() {
