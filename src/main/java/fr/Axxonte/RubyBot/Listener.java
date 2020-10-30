@@ -29,7 +29,7 @@ public class Listener extends ListenerAdapter {
             return;
         }
 
-        if ( user.getId() == "327690719085068289") {
+        if ( event.getAuthor().getIdLong() == 327690719085068289L) {
             event.getChannel().sendMessage("Casses toi " + user.getName() + ". T'es black-listed sous-merde.").queue();
             return;
         }
