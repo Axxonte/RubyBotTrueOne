@@ -35,7 +35,7 @@ public class PlayerManager {
         GuildMusicManager musicManager = musicManagers.get(guildId);
 
         if (musicManager == null) {
-            musicManager = new GuildMusicManager(playerManager, ctx.getSelfMember());
+            musicManager = new GuildMusicManager(playerManager);
             musicManagers.put(guildId, musicManager);
         }
 
@@ -52,7 +52,7 @@ public class PlayerManager {
             public void trackLoaded(AudioTrack track) {
                 boolean isFirst = false;
 
-                if (musicManager.scheduler.getQueue().size() == 0){
+                if (musicManager.scheduler.getQueue().size() == 1){
                     isFirst = true;
                 }
 
