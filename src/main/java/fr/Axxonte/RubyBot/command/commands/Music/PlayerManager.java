@@ -44,7 +44,7 @@ public class PlayerManager {
         return musicManager;
     }
 
-    public void loadAndPlay(TextChannel channel, String trackUrl) {
+    public void loadAndPlay(TextChannel channel, String trackUrl, CommandContext ctx) {
         GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
 
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
@@ -62,7 +62,7 @@ public class PlayerManager {
 
                 play(musicManager, track);
 
-                ctx = CommandManager.ctx;
+
 
                 if(isFirst) {
                     try {

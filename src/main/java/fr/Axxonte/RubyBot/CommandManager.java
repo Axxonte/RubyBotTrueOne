@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 
 public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
-    public static CommandContext ctx;
 
     public CommandManager() {
         addCommand(new PingCommand());
@@ -75,7 +74,7 @@ public class CommandManager {
             event.getChannel().sendTyping().queue();
             List<String> args = Arrays.asList(split).subList(1, split.length);
 
-            ctx = new CommandContext(event, args);
+            CommandContext ctx = new CommandContext(event, args);
 
             try {
                 cmd.handle(ctx);

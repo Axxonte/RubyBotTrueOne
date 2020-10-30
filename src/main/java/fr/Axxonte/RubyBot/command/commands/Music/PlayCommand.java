@@ -81,7 +81,7 @@ public class PlayCommand implements ICommand {
 
         PlayerManager manager = PlayerManager.getInstance();
 
-        manager.loadAndPlay(ctx.getChannel(), input);
+        manager.loadAndPlay(ctx.getChannel(), input, ctx);
 
         /*try{
             wait(10000L);
