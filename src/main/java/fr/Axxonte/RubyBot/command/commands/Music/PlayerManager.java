@@ -63,7 +63,7 @@ public class PlayerManager {
                 String newNick;
 
                 try{
-                    wait(10000L);
+                    wait(30000L);
                 }catch (Exception e)
                 {
                 if (track.getInfo().title.length() > 32){
