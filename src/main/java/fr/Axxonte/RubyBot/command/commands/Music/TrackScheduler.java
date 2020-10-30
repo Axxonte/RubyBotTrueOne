@@ -7,6 +7,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import fr.Axxonte.RubyBot.command.CommandContext;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -17,16 +18,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     private static AudioPlayer player = null;
     private final BlockingQueue<AudioTrack> queue;
-    private CommandContext ctx;
+    private Member selfM;
 
     /**
      * @param player The audio player this scheduler uses
-     * @param ctx
      */
-    public TrackScheduler(AudioPlayer player, CommandContext ctx) {
+    public TrackScheduler(AudioPlayer player, Member selfM) {
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
-        this.ctx = ctx;
+        this.selfM = selfM;
     }
 
     /**
@@ -71,7 +71,7 @@ public class TrackScheduler extends AudioEventAdapter {
             {
                 newNick = info.title;
             }
-            ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
+            selfM.modifyNickname("▶ " + newNick).queue();
         }
     }
 
@@ -98,7 +98,7 @@ public class TrackScheduler extends AudioEventAdapter {
                 {
                     newNick = info.title;
                 }
-                ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
+                selfM.modifyNickname("▶ " + newNick).queue();
             }
         }
     }

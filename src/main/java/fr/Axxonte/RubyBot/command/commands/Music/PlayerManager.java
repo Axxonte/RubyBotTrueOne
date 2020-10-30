@@ -35,7 +35,7 @@ public class PlayerManager {
         this.ctx = ctx;
 
         if (musicManager == null) {
-            musicManager = new GuildMusicManager(playerManager, ctx);
+            musicManager = new GuildMusicManager(playerManager, ctx.getSelfMember());
             musicManagers.put(guildId, musicManager);
         }
 
@@ -69,7 +69,7 @@ public class PlayerManager {
                 if (newNick.length() > 32){
                     newNick = newNick.substring(0, 30);
                 }
-                
+
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
                 }
             }

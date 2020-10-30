@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.Command;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import fr.Axxonte.RubyBot.command.CommandContext;
+import net.dv8tion.jda.api.entities.Member;
 
 public class GuildMusicManager {
     /**
@@ -15,17 +16,17 @@ public class GuildMusicManager {
      */
     public final TrackScheduler scheduler;
 
-    public final CommandContext ctx;
+    public Member selfM;
 
     /**
      * Creates a player and a track scheduler.
      * @param manager Audio player manager to use for creating the player.
      */
-    public GuildMusicManager(AudioPlayerManager manager, CommandContext ctx) {
+    public GuildMusicManager(AudioPlayerManager manager, Member selfM) {
         player = manager.createPlayer();
-        scheduler = new TrackScheduler(player, ctx);
+        scheduler = new TrackScheduler(player, selfM);
         player.addListener(scheduler);
-        this.ctx = ctx;
+        this.selfM = selfM;
     }
 
     /**
