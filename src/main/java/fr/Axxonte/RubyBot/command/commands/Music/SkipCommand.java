@@ -39,7 +39,7 @@ public class SkipCommand implements ICommand {
         String newNick = "";
 
         if (info.title.length() > 32){
-            newNick = info.title.substring(0, 31);
+            newNick = info.title.substring(0, 30);
         }
         else
         {
@@ -50,7 +50,7 @@ public class SkipCommand implements ICommand {
             wait(10000L);
         }catch (Exception e)
         {
-            ctx.getSelfMember().modifyNickname("▶" + newNick).queue();
+            ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
         }
     }
 
