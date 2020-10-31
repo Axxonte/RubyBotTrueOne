@@ -74,9 +74,7 @@ public class PlayerManager {
                     if (newNick.length() > 30) {
                         newNick = track.getInfo().title.substring(0, 30);
                     }
-
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-                    ctx.getChannel().sendMessage(newNick).queue();
                 }
             }
 
