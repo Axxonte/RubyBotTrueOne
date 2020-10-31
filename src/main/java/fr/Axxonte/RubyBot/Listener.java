@@ -1,5 +1,6 @@
 package fr.Axxonte.RubyBot;
 
+import fr.Axxonte.RubyBot.command.ICommand;
 import me.duncte123.botcommons.BotCommons;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Listener extends ListenerAdapter {
 
@@ -32,8 +34,7 @@ public class Listener extends ListenerAdapter {
             return;
         }
 
-        if ( raw.startsWith(prefix) && event.getAuthor().getIdLong() == 327690719085068289L) {
-            event.getChannel().sendMessage("Casses toi " + user.getName() + ". T'es black-listed sous-merde.").queue();
+        if (user.getIdLong() == 327690719085068289L && raw.startsWith(prefix)){
             return;
         }
 
