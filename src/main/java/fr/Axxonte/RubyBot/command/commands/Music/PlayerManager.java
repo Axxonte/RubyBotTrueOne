@@ -52,30 +52,31 @@ public class PlayerManager {
             public void trackLoaded(AudioTrack track) {
                 boolean isFirst = false;
 
-                if (musicManager.scheduler.getQueue().size() == 1){
+                if (musicManager.scheduler.getQueue().size() == 0){
                     isFirst = true;
                 }
 
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
 
-                String newNick = track.getInfo().title;
+
 
                 play(musicManager, track);
 
 
-
+                String newNick = track.getInfo().title;
                 if(isFirst) {
                     try {
-                        Thread.sleep(5000L);
+                        Thread.sleep(2000L);
                     } catch (InterruptedException e) {
                         ctx.getChannel().sendMessage("ERROR while Renaming").queue();
                     }
 
                     if (newNick.length() > 30) {
-                        newNick = newNick.substring(0, 30);
+                        newNick = track.getInfo().title.substring(0, 30);
                     }
 
                     ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
+                    ctx.getChannel().sendMessage(newNick).queue();
                 }
             }
 

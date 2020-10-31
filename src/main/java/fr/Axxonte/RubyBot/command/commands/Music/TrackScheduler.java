@@ -82,7 +82,7 @@ public class TrackScheduler extends AudioEventAdapter {
         if (endReason.mayStartNext) {
             nextTrack();
 
-            //Nickname modifier
+           /* //Nickname modifier
 
             AudioTrackInfo info = player.getPlayingTrack().getInfo();
             String newNick = "";
@@ -100,7 +100,7 @@ public class TrackScheduler extends AudioEventAdapter {
                     newNick = info.title;
                 }
                 CommandManager.ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-            }
+            }*/
         }
     }
 
