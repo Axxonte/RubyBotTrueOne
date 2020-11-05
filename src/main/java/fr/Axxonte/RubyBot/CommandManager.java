@@ -4,6 +4,7 @@ import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import fr.Axxonte.RubyBot.command.commands.*;
 import fr.Axxonte.RubyBot.command.commands.Music.*;
+import fr.Axxonte.RubyBot.command.commands.Owner.DebugCommand;
 import fr.Axxonte.RubyBot.command.commands.Owner.UpdateCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -26,6 +27,8 @@ public class CommandManager {
         addCommand(new EdtCommand());
         addCommand(new MemeCommand());
         addCommand(new LyricsCommand());
+
+        addCommand(new DebugCommand());
 
         addCommand(new JoinCommand());
         addCommand(new PlayCommand());

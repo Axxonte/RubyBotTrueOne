@@ -51,8 +51,16 @@ public class LyricsCommand implements ICommand {
                 c = lyricString.charAt(i);
                 
             }
-            ctx.getChannel().sendMessage(lyrics.getTitle() + " by " + lyrics.getArtistName() + '\n' + '\n' + lyrics.getLyrics()).queue();
-
+            String message = lyrics.getTitle() + " by " + lyrics.getArtistName() + '\n' + '\n' + lyrics.getLyrics();
+            String message1 = "";
+            String message2 = "";
+            if (message.length() < 2000) {
+                ctx.getChannel().sendMessage(lyrics.getTitle() + " by " + lyrics.getArtistName() + '\n' + '\n' + lyrics.getLyrics()).queue();
+            }else
+                message1 = message.substring(0, 1999);
+                message2 = message.substring(1999);
+                ctx.getChannel().sendMessage(message1).queue();
+                ctx.getChannel().sendMessage(message2).queue();
         }else {
 
         lyrics = api.getLyrics().search(args).execute().get(0);
