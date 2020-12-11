@@ -37,6 +37,7 @@ public class CommandManager {
         addCommand(new QueueCommand());
         addCommand(new NowPlayingCommand());
         addCommand(new VolumeCommand());
+        addCommand(new RepeatCommand());
     }
 
     private void addCommand(ICommand cmd) {
