@@ -8,8 +8,6 @@ mainClassName = 'fr.Axxonte.RubyBot.Bot'
 
 version '1.0'
 
-sourceCompatibility = JavaVersion.VERSION_11
-
 repositories {
     jcenter()
 }

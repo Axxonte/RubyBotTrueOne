@@ -20,7 +20,9 @@ public class PlayerManager {
     private static PlayerManager INSTANCE;
     private final AudioPlayerManager playerManager;
     private final Map<Long, GuildMusicManager> musicManagers;
-    private CommandContext ctx;
+    private static CommandContext ctx;
+    private static AudioTrack track;
+    private static boolean isRepeatOn = false;
 
     private PlayerManager() {
         this.musicManagers = new HashMap<>();
@@ -50,6 +52,7 @@ public class PlayerManager {
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
+
                 boolean isFirst = false;
 
                 if (musicManager.scheduler.getQueue().size() == 0){
@@ -80,17 +83,17 @@ public class PlayerManager {
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                AudioTrack firstTrack = playlist.getSelectedTrack();
+                AudioTrack track = playlist.getSelectedTrack();
 
-                if (firstTrack == null) {
-                    firstTrack = playlist.getTracks().get(0);
+                if (track == null) {
+                    track = playlist.getTracks().get(0);
 
 
                 }
 
-                channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
+                channel.sendMessage("Adding to queue " + track.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
 
-                play(musicManager, firstTrack);
+                play(musicManager, track);
             }
 
             @Override
@@ -106,6 +109,10 @@ public class PlayerManager {
 
     }
 
+    public static void toggleRepeat(){
+        isRepeatOn = !isRepeatOn;
+    }
+
     private void play(GuildMusicManager musicManager, AudioTrack track) {
 
         musicManager.scheduler.queue(track);
@@ -113,10 +120,9 @@ public class PlayerManager {
     }
 
     public static synchronized PlayerManager getInstance() {
-        if (INSTANCE == null) {
+        if (INSTANCE == null || !ctx.getSelfMember().getVoiceState().inVoiceChannel()) {
             INSTANCE = new PlayerManager();
         }
-
         return INSTANCE;
     }
 }

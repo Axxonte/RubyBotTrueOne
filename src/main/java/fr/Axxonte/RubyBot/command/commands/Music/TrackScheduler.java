@@ -65,7 +65,7 @@ public class TrackScheduler extends AudioEventAdapter {
             wait(10000L);
         }catch (Exception e)
         {
-            if (info.title.length() > 32){
+            if (info.title.length() > 30){
                 newNick = info.title.substring(0, 30);
             }
             else

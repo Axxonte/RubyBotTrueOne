@@ -55,10 +55,6 @@ public class PlayCommand implements ICommand {
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
         AudioPlayer player = musicManager.player;
 
-        if(!ctx.getSelfMember().getVoiceState().inVoiceChannel()){
-            audioManager.openAudioConnection(vc);
-        }
-
         if (ctx.getArgs().isEmpty()) {
             channel.sendMessage("Please provide some arguments").queue();
 
@@ -77,6 +73,10 @@ public class PlayCommand implements ICommand {
             }
 
             input = ytSearched;
+        }
+
+        if(!ctx.getSelfMember().getVoiceState().inVoiceChannel()){
+            audioManager.openAudioConnection(vc);
         }
 
         PlayerManager manager = PlayerManager.getInstance();
