@@ -42,7 +42,7 @@ public class WarnCommand implements ICommand {
 
         //Code
 
-        gson.toJson(idWarned, file);
+        //gson.toJson(idWarned, file);
 
     }
 
