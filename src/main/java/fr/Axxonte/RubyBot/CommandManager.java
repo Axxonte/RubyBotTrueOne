@@ -3,6 +3,7 @@ package fr.Axxonte.RubyBot;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import fr.Axxonte.RubyBot.command.commands.*;
+import fr.Axxonte.RubyBot.command.commands.Moderation.WarnCommand;
 import fr.Axxonte.RubyBot.command.commands.Music.*;
 import fr.Axxonte.RubyBot.command.commands.Owner.DebugCommand;
 import fr.Axxonte.RubyBot.command.commands.Owner.UpdateCommand;
@@ -39,6 +40,7 @@ public class CommandManager {
         addCommand(new VolumeCommand());
         addCommand(new RepeatCommand());
         addCommand(new PauseCommand());
+
     }
 
     private void addCommand(ICommand cmd) {
