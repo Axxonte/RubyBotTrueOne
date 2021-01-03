@@ -29,7 +29,6 @@ public class Listener extends ListenerAdapter {
 
         String prefix = Config.get("prefix");
         String prefix2 = "<@!709136566056124566>";
-        System.out.println(event.getGuild().getSelfMember().getAsMention());
         String raw = event.getMessage().getContentRaw();
 
         if (user.isBot() || event.isWebhookMessage()) {
