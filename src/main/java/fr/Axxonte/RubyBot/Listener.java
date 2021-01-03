@@ -27,7 +27,7 @@ public class Listener extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         User user = event.getAuthor();
 
-        String prefix = "<@709136566056124566>";
+        String prefix = Config.get("prefix");
         String prefix2 = "<@!709136566056124566>";
         System.out.println(event.getGuild().getSelfMember().getAsMention());
         String raw = event.getMessage().getContentRaw();
