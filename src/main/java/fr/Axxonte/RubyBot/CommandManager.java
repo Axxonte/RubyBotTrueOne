@@ -39,7 +39,7 @@ public class CommandManager {
         addCommand(new NowPlayingCommand());
         addCommand(new VolumeCommand());
         addCommand(new PauseCommand());
-        addCommand(new ResumeCommand));
+        addCommand(new ResumeCommand());
     }
 
     private void addCommand(ICommand cmd) {
