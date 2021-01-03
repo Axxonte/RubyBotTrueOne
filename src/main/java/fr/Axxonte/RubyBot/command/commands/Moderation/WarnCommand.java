@@ -9,6 +9,7 @@ import fr.Axxonte.RubyBot.command.ICommand;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -24,6 +25,7 @@ public class WarnCommand implements ICommand {
 
         if (ctx.getMessage().getMentionedMembers().size() != 1){
             ctx.getChannel().sendMessage("Too much or not enough mention.").queue();
+            return;
         }
 
         if (ctx.getArgs().isEmpty()){
@@ -34,11 +36,13 @@ public class WarnCommand implements ICommand {
         Gson gson = new Gson();
 
         //Variables
-        Member warned = ctx.getMessage().getMentionedMembers().get(0);
+        long idWarned = ctx.getMessage().getMentionedMembers().get(0).getIdLong();
         GuildObject server = new GuildObject(ctx.getGuild().getIdLong());
+        File file = new File("test.txt");
 
         //Code
 
+        gson.toJson(idWarned, file);
 
     }
 
