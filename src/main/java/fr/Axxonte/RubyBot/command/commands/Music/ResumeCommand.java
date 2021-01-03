@@ -19,11 +19,11 @@ public class ResumeCommand implements ICommand {
 
     @Override
     public String getName() {
-        return null;
+        return "resume";
     }
 
     @Override
     public String getHelp() {
-        return null;
+        return "Resume music player.";
     }
 }
