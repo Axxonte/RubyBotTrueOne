@@ -120,7 +120,7 @@ public class PlayerManager {
     }
 
     public static synchronized PlayerManager getInstance() {
-        if (INSTANCE == null || !ctx.getSelfMember().getVoiceState().inVoiceChannel()) {
+        if (INSTANCE == null /*|| !ctx.getSelfMember().getVoiceState().inVoiceChannel()*/) {
             INSTANCE = new PlayerManager();
         }
         return INSTANCE;
