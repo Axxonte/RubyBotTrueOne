@@ -9,7 +9,7 @@ public class RepeatCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws IOException, Exception {
         PlayerManager playerManager = PlayerManager.getInstance();
-        playerManager
+        //playerManager
     }
 
     @Override

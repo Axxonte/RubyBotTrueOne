@@ -27,18 +27,24 @@ public class Listener extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         User user = event.getAuthor();
 
-        String prefix = Config.get("prefix");
+        String prefix = "<@709136566056124566>";
+        String prefix2 = "<@!709136566056124566>";
+        System.out.println(event.getGuild().getSelfMember().getAsMention());
         String raw = event.getMessage().getContentRaw();
 
         if (user.isBot() || event.isWebhookMessage()) {
             return;
         }
 
-        if (user.getIdLong() == 327690719085068289L && raw.startsWith(prefix)){
+       /* if (user.getIdLong() == 327690719085068289L && raw.startsWith(prefix)){
             return;
-        }
+        }*/
 
-        if (raw.equalsIgnoreCase(prefix + "shutdown")
+
+
+        if (raw.equalsIgnoreCase(prefix + " shutdown")
+                && user.getId().equals(Config.get("owner_id")) ||
+                raw.equalsIgnoreCase(prefix2 + " shutdown")
                 && user.getId().equals(Config.get("owner_id"))) {
             LOGGER.info("Shutting down");
             event.getJDA().shutdown();
@@ -47,7 +53,7 @@ public class Listener extends ListenerAdapter {
             return;
         }
 
-        if (raw.startsWith(prefix)) {
+        if (raw.startsWith(prefix) || raw.startsWith(prefix2)) {
             try {
                 manager.handle(event);
             } catch (IOException e) {

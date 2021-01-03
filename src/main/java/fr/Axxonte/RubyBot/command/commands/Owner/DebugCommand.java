@@ -18,18 +18,7 @@ public class DebugCommand implements ICommand {
             return;
         }
 
-        /*for (int i = 0; i < 3; i++) {
-            DebugObject test = new DebugObject(i, "test", (i*11));
-
-            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            String json = ow.writeValueAsString(test);
-
-            FileWriter file = new FileWriter("test.txt", true);
-            file.append(json);
-            file.close();
-        }*/
-        ctx.getMessage().getMentionedMembers().get(0);
-        ctx.getChannel().sendMessage(ctx.getMessage().getMentionedMembers().get(0).getUser().getAvatarUrl()).queue();
+        ctx.getChannel().sendMessage(ctx.getGuild().getSelfMember().getPermissions().toString()).queue();
     }
 
     @Override
