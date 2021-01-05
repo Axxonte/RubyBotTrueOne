@@ -40,6 +40,7 @@ public class CommandManager {
         addCommand(new VolumeCommand());
         addCommand(new RepeatCommand());
         addCommand(new PauseCommand());
+        addCommand(new ResumeCommand());
 
     }
 
