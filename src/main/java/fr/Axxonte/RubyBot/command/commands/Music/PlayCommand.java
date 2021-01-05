@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -61,6 +62,7 @@ public class PlayCommand implements ICommand {
             channel.sendMessage(new EmbedBuilder()
                     .setTitle("Error encountered during the command")
                     .addField(null, "You have to provide something to search." , false)
+                    .setColor(new Color(235, 52, 198))
                     .build()).queue();
 
             return;
@@ -76,6 +78,7 @@ public class PlayCommand implements ICommand {
                 channel.sendMessage(new EmbedBuilder()
                         .setTitle("Error encountered during the command")
                         .addField(null, "Nothing found." , false)
+                        .setColor(new Color(235, 52, 198))
                         .build()).queue();
 
                 return;

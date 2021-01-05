@@ -8,6 +8,7 @@ import me.duncte123.botcommons.messaging.EmbedUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -29,7 +30,7 @@ public class QueueCommand implements ICommand {
         int trackCount = Math.min(queue.size(), 20);
         List<AudioTrack> tracks = new ArrayList<>(queue);
         EmbedBuilder builder = EmbedUtils.defaultEmbed()
-                .setTitle("Current Queue (Total: " + queue.size() + ")");
+                .setTitle("Current Queue (Total: " + queue.size() + ")").setColor(new Color(235, 52, 198));
 
         for (int i = 0; i < trackCount; i++) {
             AudioTrack track = tracks.get(i);

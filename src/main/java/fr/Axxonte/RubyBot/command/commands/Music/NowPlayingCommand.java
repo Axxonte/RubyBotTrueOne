@@ -8,6 +8,7 @@ import me.duncte123.botcommons.messaging.EmbedUtils;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 public class NowPlayingCommand implements ICommand {
@@ -34,7 +35,7 @@ public class NowPlayingCommand implements ICommand {
                 player.isPaused() ? "\u23F8" : "▶",
                 formatTime(player.getPlayingTrack().getPosition()),
                 formatTime(player.getPlayingTrack().getDuration())
-        )).build()).queue();
+        )).setColor(new Color(235, 52, 198)).build()).queue();
     }
 
     @Override

@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +58,7 @@ public class PlayerManager {
                 channel.sendMessage(new EmbedBuilder()
                         .setTitle(":arrow_forward: " + track.getInfo().title, trackUrl)
                         .addField(null, "Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName() + "." , false)
+                        .setColor(new Color(235, 52, 198))
                         .build()).queue();
                 play(musicManager, track);
             }
