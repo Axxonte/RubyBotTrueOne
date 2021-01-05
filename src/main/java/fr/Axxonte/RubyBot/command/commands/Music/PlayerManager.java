@@ -57,7 +57,7 @@ public class PlayerManager {
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
                 channel.sendMessage(new EmbedBuilder()
                         .setTitle(":arrow_forward: " + track.getInfo().title, trackUrl)
-                        .addField(null, "Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName() + "." , false)
+                        .addField("", "Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName() + "." , false)
                         .setColor(new Color(235, 52, 198))
                         .build()).queue();
                 play(musicManager, track);
