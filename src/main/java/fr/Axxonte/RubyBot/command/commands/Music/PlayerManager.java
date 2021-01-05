@@ -10,6 +10,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import fr.Axxonte.RubyBot.CommandManager;
 import fr.Axxonte.RubyBot.command.CommandContext;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
@@ -52,33 +53,12 @@ public class PlayerManager {
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-
-                boolean isFirst = false;
-
-                if (musicManager.scheduler.getQueue().size() == 0){
-                    isFirst = true;
-                }
-
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
-
-
-
+                channel.sendMessage(new EmbedBuilder()
+                        .setTitle(":arrow_forward: " + track.getInfo().title, trackUrl)
+                        .addField(null, "Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName() + "." , false)
+                        .build()).queue();
                 play(musicManager, track);
-
-
-                String newNick = track.getInfo().title;
-                if(isFirst) {
-                    try {
-                        Thread.sleep(2000L);
-                    } catch (InterruptedException e) {
-                        ctx.getChannel().sendMessage("ERROR while Renaming").queue();
-                    }
-
-                    if (newNick.length() > 30) {
-                        newNick = track.getInfo().title.substring(0, 30);
-                    }
-                    ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-                }
             }
 
             @Override
@@ -120,7 +100,7 @@ public class PlayerManager {
     }
 
     public static synchronized PlayerManager getInstance() {
-        if (INSTANCE == null /*|| !ctx.getSelfMember().getVoiceState().inVoiceChannel()*/) {
+        if (INSTANCE == null) {
             INSTANCE = new PlayerManager();
         }
         return INSTANCE;

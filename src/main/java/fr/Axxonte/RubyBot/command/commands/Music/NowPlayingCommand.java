@@ -44,7 +44,7 @@ public class NowPlayingCommand implements ICommand {
 
     @Override
     public String getHelp() {
-        return null;
+        return "Display the sound actually played in the channel.";
     }
 
     private String formatTime(long timeInMillis) {

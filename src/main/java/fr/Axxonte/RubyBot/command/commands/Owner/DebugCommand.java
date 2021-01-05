@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.EmbedType;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +21,15 @@ public class DebugCommand implements ICommand {
             return;
         }
 
-        ctx.getChannel().sendMessage(ctx.getGuild().getSelfMember().getPermissions().toString()).queue();
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setTitle("DEBUG")
+                .addField("Permissions" , ctx.getGuild().getSelfMember().getPermissions().toString() ,false)
+                .addField("TEST", "Inline Inline Inline",true)
+                .addField("TEST", "Inline Inline Inline",true)
+                .addField("TEST", "Inline Inline Inline",true)
+
+                .setColor(new Color(235, 52, 198));
+        ctx.getChannel().sendMessage(embed.build()).queue();
     }
 
     @Override

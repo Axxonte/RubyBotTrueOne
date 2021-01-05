@@ -55,25 +55,6 @@ public class TrackScheduler extends AudioEventAdapter {
         // Start the next track, regardless of if something is already playing or not. In case queue was empty, we are
         // giving null to startTrack, which is a valid argument and will simply stop the player.
         player.startTrack(queue.poll(), false);
-
-        //Nickname modifier
-
-        AudioTrackInfo info = player.getPlayingTrack().getInfo();
-        String newNick = "";
-
-        try{
-            wait(10000L);
-        }catch (Exception e)
-        {
-            if (info.title.length() > 30){
-                newNick = info.title.substring(0, 30);
-            }
-            else
-            {
-                newNick = info.title;
-            }
-            CommandManager.ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-        }
     }
 
     @Override
@@ -82,25 +63,6 @@ public class TrackScheduler extends AudioEventAdapter {
         if (endReason.mayStartNext) {
             nextTrack();
 
-           /* //Nickname modifier
-
-            AudioTrackInfo info = player.getPlayingTrack().getInfo();
-            String newNick = "";
-
-            try{
-                wait(10000L);
-
-            }catch (Exception e)
-            {
-                if (info.title.length() > 32){
-                    newNick = info.title.substring(0, 30);
-                }
-                else
-                {
-                    newNick = info.title;
-                }
-                CommandManager.ctx.getSelfMember().modifyNickname("▶ " + newNick).queue();
-            }*/
         }
     }
 

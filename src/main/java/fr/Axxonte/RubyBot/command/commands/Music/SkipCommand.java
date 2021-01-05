@@ -20,7 +20,7 @@ public class SkipCommand implements ICommand {
         BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 
         if (!ctx.getSelfMember().getVoiceState().getChannel().getMembers().contains(ctx.getMember())){
-            ctx.getChannel().sendMessage("You nee to be with me in a voice channel to change volume.").queue();
+            ctx.getChannel().sendMessage("You need to be with me in a voice channel to change volume.").queue();
             return;
         }
 

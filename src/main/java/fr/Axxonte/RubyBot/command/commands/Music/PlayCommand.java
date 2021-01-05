@@ -9,6 +9,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import fr.Axxonte.RubyBot.Config;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -56,7 +57,11 @@ public class PlayCommand implements ICommand {
         AudioPlayer player = musicManager.player;
 
         if (ctx.getArgs().isEmpty()) {
-            channel.sendMessage("Please provide some arguments").queue();
+            //channel.sendMessage("Please provide some arguments").queue();
+            channel.sendMessage(new EmbedBuilder()
+                    .setTitle("Error encountered during the command")
+                    .addField(null, "You have to provide something to search." , false)
+                    .build()).queue();
 
             return;
         }
@@ -67,7 +72,11 @@ public class PlayCommand implements ICommand {
             String ytSearched = searchYoutube(input);
 
             if (ytSearched == null) {
-                channel.sendMessage("Nothing found.").queue();
+                //channel.sendMessage("Nothing found.").queue();
+                channel.sendMessage(new EmbedBuilder()
+                        .setTitle("Error encountered during the command")
+                        .addField(null, "Nothing found." , false)
+                        .build()).queue();
 
                 return;
             }
@@ -82,17 +91,6 @@ public class PlayCommand implements ICommand {
         PlayerManager manager = PlayerManager.getInstance();
 
         manager.loadAndPlay(ctx.getChannel(), input, ctx);
-
-        /*try{
-            wait(10000L);
-        }catch (Exception e)
-        {
-            //Nickname modifier
-            AudioTrackInfo info = player.getPlayingTrack().getInfo();
-            ctx.getSelfMember().modifyNickname(info.title).queue();
-        }*/
-
-
     }
 
     private boolean isUrl(String input) {
