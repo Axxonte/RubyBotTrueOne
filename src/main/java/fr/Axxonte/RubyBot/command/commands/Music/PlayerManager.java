@@ -54,11 +54,12 @@ public class PlayerManager {
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
                 channel.sendMessage(new EmbedBuilder()
-                        .setTitle(":arrow_forward: " + track.getInfo().title, trackUrl)
-                        .addField("", "Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName() + "." , false)
+                        .setTitle("\uD83C\uDFA7 Playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
+                        .addField("", "🎵 Added " + track.getInfo().title + " by " + track.getInfo().author + " to the queue" + "." , false)
                         .setColor(new Color(235, 52, 198))
+                        .setThumbnail("https://img.youtube.com/vi/" + track.getInfo().identifier + "/0.jpg")
+                        .setFooter("Requested by " + ctx.getMessage().getAuthor().getName(), ctx.getAuthor().getAvatarUrl())
                         .build()).queue();
                 play(musicManager, track);
             }
