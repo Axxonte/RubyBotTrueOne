@@ -55,7 +55,7 @@ public class PlayerManager {
             @Override
             public void trackLoaded(AudioTrack track) {
                 channel.sendMessage(new EmbedBuilder()
-                        .setTitle("\uD83C\uDFA7 Playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
+                        .setTitle("<:playBLANC:796365977301942283> Playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
                         .addField("", "🎵 Added " + track.getInfo().title + " by " + track.getInfo().author + " to the queue" + "." , false)
                         .setColor(new Color(235, 52, 198))
                         .setThumbnail("https://img.youtube.com/vi/" + track.getInfo().identifier + "/0.jpg")

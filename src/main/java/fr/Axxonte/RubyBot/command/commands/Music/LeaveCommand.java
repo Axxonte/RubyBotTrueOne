@@ -26,6 +26,7 @@ public class LeaveCommand implements ICommand {
 
         audioManager.closeAudioConnection();
         channel.sendMessage("Disconnected from your channel").queue();
+        ctx.getSelfMember().modifyNickname("").queue();
     }
 
     @Override

@@ -21,15 +21,8 @@ public class DebugCommand implements ICommand {
             return;
         }
 
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setTitle("DEBUG")
-                .addField("Permissions" , ctx.getGuild().getSelfMember().getPermissions().toString() ,false)
-                .addField("TEST", "Inline Inline Inline",true)
-                .addField("TEST", "Inline Inline Inline",true)
-                .addField("TEST", "Inline Inline Inline",true)
-
-                .setColor(new Color(235, 52, 198));
-        ctx.getChannel().sendMessage(embed.build()).queue();
+        ctx.getChannel().sendMessage(ctx.getMessage()).queue();
+        System.out.println(ctx.getArgs().toString());
     }
 
     @Override
