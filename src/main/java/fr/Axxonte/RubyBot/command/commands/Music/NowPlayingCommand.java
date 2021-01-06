@@ -24,7 +24,7 @@ public class NowPlayingCommand implements ICommand {
         AudioTrack track = null;
         TrackScheduler scheduler = musicManager.scheduler;
 
-        track = scheduler.getQueue().peek();
+        track = musicManager.player.getPlayingTrack();
 
 
         if (player.getPlayingTrack() == null) {
