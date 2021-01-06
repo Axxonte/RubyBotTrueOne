@@ -70,8 +70,6 @@ public class PlayerManager {
 
                 if (track == null) {
                     track = playlist.getTracks().get(0);
-
-
                 }
 
                 channel.sendMessage("Adding to queue " + track.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();

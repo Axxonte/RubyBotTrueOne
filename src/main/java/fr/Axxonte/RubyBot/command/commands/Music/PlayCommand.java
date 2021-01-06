@@ -77,7 +77,7 @@ public class PlayCommand implements ICommand {
                 //channel.sendMessage("Nothing found.").queue();
                 channel.sendMessage(new EmbedBuilder()
                         .setTitle("Error encountered during the command")
-                        .addField(null, "Nothing found." , false)
+                        .addField("", "Nothing found." , false)
                         .setColor(new Color(235, 52, 198))
                         .build()).queue();
 

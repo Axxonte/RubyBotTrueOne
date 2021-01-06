@@ -1,10 +1,12 @@
 package fr.Axxonte.RubyBot.command.commands.Music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import fr.Axxonte.RubyBot.command.CommandContext;
 import fr.Axxonte.RubyBot.command.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -19,10 +21,25 @@ public class NowPlayingCommand implements ICommand {
         PlayerManager playerManager = PlayerManager.getInstance();
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(event.getGuild());
         AudioPlayer player = musicManager.player;
+        AudioTrack track = null;
+        TrackScheduler scheduler = musicManager.scheduler;
+
+        track = scheduler.getQueue().peek();
+
 
         if (player.getPlayingTrack() == null) {
             channel.sendMessage("The player is not playing any song.").queue();
 
+            return;
+        }
+
+        if(track.getInfo().isStream){
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setTitle("<:djBlanc:796414818629845032> Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
+                    .addField("", "Playing " + track.getInfo().title + "by " + track.getInfo().author + "." , false)
+                    .addField("", ":red_circle: : Streaming" , false)
+                    .setFooter("Request by " + ctx.getAuthor().getName(), ctx.getAuthor().getAvatarUrl())
+                    .setColor(new Color(235, 52, 198));
             return;
         }
 
