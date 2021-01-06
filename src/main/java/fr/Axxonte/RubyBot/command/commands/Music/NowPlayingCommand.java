@@ -40,6 +40,7 @@ public class NowPlayingCommand implements ICommand {
                     .addField("", ":red_circle: : Streaming" , false)
                     .setFooter("Request by " + ctx.getAuthor().getName(), ctx.getAuthor().getAvatarUrl())
                     .setColor(new Color(235, 52, 198));
+            ctx.getChannel().sendMessage(embed.build()).queue();
             return;
         }
 
