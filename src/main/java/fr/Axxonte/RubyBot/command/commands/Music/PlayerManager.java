@@ -13,6 +13,7 @@ import fr.Axxonte.RubyBot.command.CommandContext;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -50,6 +51,13 @@ public class PlayerManager {
 
     public void loadAndPlay(TextChannel channel, String trackUrl, CommandContext ctx) {
         GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
+        AudioManager audioManager = ctx.getGuild().getAudioManager();
+
+
+        if (!ctx.getSelfMember().getVoiceState().inVoiceChannel()){
+            audioManager.openAudioConnection(ctx.getMember().getVoiceState().getChannel());
+        }
+
 
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override

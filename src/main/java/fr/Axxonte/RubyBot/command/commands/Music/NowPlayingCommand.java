@@ -37,7 +37,7 @@ public class NowPlayingCommand implements ICommand {
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("<:djBlanc:796414818629845032> Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
                     .addField("", "Playing " + track.getInfo().title + "by " + track.getInfo().author + "." , false)
-                    .addField("", ":red_circle: : Streaming" , false)
+                    .addField("", ":red_circle: : Streaming" , true)
                     .setFooter("Request by " + ctx.getAuthor().getName(), ctx.getAuthor().getAvatarUrl())
                     .setColor(new Color(235, 52, 198));
             ctx.getChannel().sendMessage(embed.build()).queue();
@@ -45,6 +45,16 @@ public class NowPlayingCommand implements ICommand {
         }
 
         AudioTrackInfo info = player.getPlayingTrack().getInfo();
+
+        ctx.getChannel().sendMessage(track.getPosition() + " ========= " + track.getDuration()).queue();
+
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setTitle("<:djBlanc:796414818629845032> Actually playing in " + ctx.getSelfMember().getVoiceState().getChannel().getName())
+                .addField("", "Playing " + track.getInfo().title + "by " + track.getInfo().author + "." , false)
+                .addField("", ":red_circle: : Streaming" , true)
+                .setFooter("Request by " + ctx.getAuthor().getName(), ctx.getAuthor().getAvatarUrl())
+                .setColor(new Color(235, 52, 198));
+        ctx.getChannel().sendMessage(embed.build()).queue();
 
         channel.sendMessage(EmbedUtils.embedMessage(String.format(
                 "**Playing** [%s](%s)\n%s %s - %s",
