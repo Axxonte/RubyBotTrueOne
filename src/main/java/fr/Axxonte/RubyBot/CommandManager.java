@@ -26,8 +26,6 @@ public class CommandManager {
         addCommand(new PasteCommand());
         addCommand(new UpdateCommand());
         addCommand(new EdtCommand());
-        addCommand(new MemeCommand());
-        addCommand(new LyricsCommand());
 
         addCommand(new DebugCommand());
 
